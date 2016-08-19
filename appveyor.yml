@@ -1,0 +1,7 @@
+version: 1.0.{build}
+before_build:
+- ps: nuget restore
+build:
+  verbosity: minimal
+test_script:
+- ps: nunit3-console --x86 NUnitTests\bin\Debug\NUnitTests.dll
