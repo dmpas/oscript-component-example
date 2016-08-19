@@ -26,9 +26,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Ionic.Zip">
-      <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
-    </Reference>
     <Reference Include="ScriptEngine.HostedScript">
       <HintPath>..\packages\OneScript.StandardLibrary.1.0.14\lib\net40\ScriptEngine.HostedScript.dll</HintPath>
     </Reference>
@@ -57,9 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tests\testrunner.os" />
-    <EmbeddedResource Include="Tests\external.os">
-      <DeployService.Deploy>true</DeployService.Deploy>
-    </EmbeddedResource>
+	<EmbeddedResource Include="Tests\external.os" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
