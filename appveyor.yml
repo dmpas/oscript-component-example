@@ -1,6 +1,10 @@
 version: 1.0.{build}
 before_build:
 - ps: nuget restore
+init:
+- ps: Set-WinSystemLocale ru-RU
+- ps: Start-Sleep -s 5
+- ps: Restart-Computer
 build:
   verbosity: minimal
 test_script:
