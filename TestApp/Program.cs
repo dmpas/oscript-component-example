@@ -5,6 +5,7 @@
 
 using System;
 using ScriptEngine.HostedScript;
+using ScriptEngine.HostedScript.Library;
 
 namespace TestApp
 {
@@ -55,7 +56,7 @@ namespace TestApp
 			// ВАЖНО: движок перехватывает исключения, для отладки можно пользоваться только точками останова.
 		}
 
-		public void Echo(string str, EchoStatus status = EchoStatus.Undefined)
+		public void Echo(string str, MessageStatusEnum status = MessageStatusEnum.Ordinary)
 		{
 			Console.WriteLine(str);
 		}

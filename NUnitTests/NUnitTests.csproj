@@ -26,17 +26,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="ScriptEngine.HostedScript">
-      <HintPath>..\packages\OneScript.StandardLibrary.1.0.14\lib\net40\ScriptEngine.HostedScript.dll</HintPath>
-    </Reference>
-    <Reference Include="ScriptEngine">
-      <HintPath>..\packages\OneScript.1.0.14\lib\net40\ScriptEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="DotNetZip">
       <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptEngine">
+      <HintPath>..\packages\OneScript.1.0.15\lib\net40\ScriptEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptEngine.HostedScript">
+      <HintPath>..\packages\OneScript.StandardLibrary.1.0.15\lib\net40\ScriptEngine.HostedScript.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

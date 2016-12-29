@@ -107,7 +107,7 @@ namespace NUnitTests
             return engine.Loader.FromString(codeSource);
         }
 
-        public void Echo(string str, EchoStatus status = EchoStatus.Undefined)
+		public void Echo(string str, MessageStatusEnum status = MessageStatusEnum.Ordinary)
         {
         }
 
