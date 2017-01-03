@@ -42,6 +42,23 @@ namespace NUnitTests
             Assert.AreEqual(sum.Calculate(), ValueFactory.Create(5));
         }
 
+		[Test]
+		public void TestAsInternalCollection()
+		{
+			var item1 = new SumItem(1);
+			var item2 = new SumItem(2);
+			var sum = new Addition();
+
+			sum.AddItem(item1);
+			sum.AddItem(item2);
+
+			foreach (var item in sum)
+			{
+				// В случае, если Addition не воплощает IEnumerable,
+				// этот цикл не скомпилируется
+			}
+		}
+
         [Test]
         public void TestAsExternalObjects()
         {

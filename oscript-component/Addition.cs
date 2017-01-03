@@ -2,16 +2,25 @@
 using ScriptEngine.Machine.Contexts;
 using ScriptEngine.Machine;
 using ScriptEngine.HostedScript.Library;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace oscriptcomponent
 {
     [ContextClass("Сложение", "Addition")]
-    public class Addition : AutoContext<Addition>
-    {
-        // Возьмём Массив из стандартной библиотеки
-        private ArrayImpl items;
+	public class Addition : AutoContext<Addition>
+	, ICollectionContext   // Скажем ОдноСкрипту, что это коллекция
+	, IEnumerable<SumItem> // IEnumerable<> нужен, чтобы работать с классом как с коллекцией из C#
 
-        public Addition()
+	/*
+	 * До 15-й версии движка ICollectionContext включает в себя IEnumerable<IValue>.
+	 * Начиная с 15-й версии IEnumerable<> необходимо указывать явно с нужным типом элемента
+	*/
+    {
+		// Возьмём Массив из стандартной библиотеки
+		private readonly ArrayImpl items;
+
+		public Addition()
         {
             items = ArrayImpl.Constructor() as ArrayImpl;
 
@@ -84,6 +93,36 @@ namespace oscriptcomponent
             return addition;
         }
 
-    }
+		#region Методы коллекции
+
+		// Данные методы необходимы, чтобы ОдноСкрипт мог обходить объект циклом Для Каждого
+		public int Count()
+		{
+			return ((ICollectionContext)items).Count();
+		}
+
+		public CollectionEnumerator GetManagedIterator()
+		{
+			return ((ICollectionContext)items).GetManagedIterator();
+		}
+
+		#endregion
+
+		#region IEnumerable<>
+		public IEnumerator<SumItem> GetEnumerator()
+		{
+			foreach (var item in items)
+			{
+				// ArrayImpl воплощает IEnumerable<IValue> - необходимо явно приводить к SumItem
+				yield return (item as SumItem);
+			}
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
+		}
+		#endregion
+	}
 }
 
