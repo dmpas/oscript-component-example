@@ -1,0 +1,8 @@
+Описание.Имя("component")
+	.Версия("1.0.0")
+	.ВключитьФайл("lib.config")
+	.ВключитьФайл("bin")
+	.ВключитьФайл("package-loader.os")
+;
+
+// vim: filetype=onescript
