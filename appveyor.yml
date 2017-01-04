@@ -9,3 +9,6 @@ build:
   verbosity: minimal
 test_script:
 - ps: nunit3-console --x86 NUnitTests\bin\Debug\NUnitTests.dll
+artifacts:
+- path: oscript-component\bin\Debug\*.dll
+  name: component
