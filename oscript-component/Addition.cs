@@ -39,6 +39,9 @@ namespace oscriptcomponent
 			get { return items; }
 		}
 
+		[ContextProperty("ВидОперации", "OperationType")]
+		public OperationTypesEnum OperationType { get; set; }
+
 		[ContextMethod("ДобавитьСлагаемое", "AddItem")]
 		public void AddItem(IValue item)
 		{
@@ -49,11 +52,15 @@ namespace oscriptcomponent
 		[ContextMethod("Вычислить", "Calculate")]
 		public IValue Calculate()
 		{
-			Decimal result = 0;
+			Decimal result = OperationType == OperationTypesEnum.Addition ? 0 : 1;
 			foreach (var item in items)
 			{
 				var sumItem = item as SumItem;
-				result += sumItem.Value;
+
+				if (OperationType == OperationTypesEnum.Addition)
+					result += sumItem.Value;
+				else
+					result *= sumItem.Value;
 			}
 			return ValueFactory.Create(result);
 		}
