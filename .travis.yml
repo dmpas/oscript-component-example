@@ -1,7 +1,7 @@
 language: csharp
 install:
     - nuget restore
-    - nuget install NUnit.Runners -Version 3.5.0 -OutputDirectory testrunner
+    - nuget install NUnit.Console -Version 3.6.1 -OutputDirectory testrunner
 script:
     - xbuild /p:Configuration=Release
-    - mono ./testrunner/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe ./NUnitTests/bin/Release/NUnitTests.dll
+    - mono ./testrunner/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe ./NUnitTests/bin/Release/NUnitTests.dll
