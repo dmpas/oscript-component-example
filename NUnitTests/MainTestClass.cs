@@ -26,28 +26,28 @@ namespace NUnitTests
 		[Test]
 		public void TestAsInternalObjects()
 		{
-			var item1 = new SumItem(1);
-			var item2 = new SumItem(2);
-			var sum = new Addition();
+			var item1 = new CalcItem(1);
+			var item2 = new CalcItem(2);
+			var sum = new Calculation();
 
 			sum.AddItem(item1);
 			sum.AddItem(item2);
 
-			Assert.AreEqual(sum.Calculate(), ValueFactory.Create(3));
+			Assert.AreEqual(sum.Calculate(), 3);
 
-			sum.AddItem(new SumItem(3));
-			Assert.AreEqual(sum.Calculate(), ValueFactory.Create(6));
+			sum.AddItem(new CalcItem(3));
+			Assert.AreEqual(sum.Calculate(), 6);
 
-			sum.AddItem(new SumItem(-1));
-			Assert.AreEqual(sum.Calculate(), ValueFactory.Create(5));
+			sum.AddItem(new CalcItem(-1));
+			Assert.AreEqual(sum.Calculate(), 5);
 		}
 
 		[Test]
 		public void TestAsInternalCollection()
 		{
-			var item1 = new SumItem(1);
-			var item2 = new SumItem(2);
-			var sum = new Addition();
+			var item1 = new CalcItem(1);
+			var item2 = new CalcItem(2);
+			var sum = new Calculation();
 
 			sum.AddItem(item1);
 			sum.AddItem(item2);
