@@ -11,13 +11,17 @@ install:
 
     cd engine
 
-    curl -o os.exe http://oscript.io/downloads/latest/exe
+    appveyor DownloadFile http://oscript.io/downloads/latest/exe -FileName os.exe
 
     os.exe /silent
 
     set PATH=%ProgramFiles(x86)%\OneScript\bin;%PATH%
 
     cd ..
+    
+    appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.10/documenter.zip -FileName OneScriptDocumenter.zip
+    
+    7z x OneScriptDocumenter.zip > NUL
 
     oscript -version
 
@@ -33,8 +37,12 @@ after_build:
 # Указывать по маске *.dll не стоит, потому что тут же лежат
 # библиотеки из NuGet - ОдноСкрипт и все зависимости
 - cmd: >-
-    copy oscript-component\bin\Debug\oscript-component.dll oslib\bin\
+    OneScriptDocumenter.exe json oslib\bin\syntaxHelp.json oscript-component\bin\Debug\oscript-component.dll
 
+    copy oscript-component\bin\Debug\oscript-component.dll oslib\bin\
+    
+    copy oscript-component\bin\Debug\oscript-component.xml oslib\bin\
+    
     cd oslib
 
     opm build .
