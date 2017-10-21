@@ -38,6 +38,8 @@ after_build:
     OneScriptDocumenter.exe json oslib\bin\syntaxHelp.json oscript-component\bin\%CONFIGURATION%\oscript-component.dll
 
     xcopy oscript-component\bin\%CONFIGURATION%\oscript-component.* oslib\bin\
+
+    xcopy README.md osblib
     
     cd oslib
 
