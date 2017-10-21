@@ -19,7 +19,7 @@ install:
 
     cd ..
     
-    appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.10/documenter.zip -FileName OneScriptDocumenter.zip
+    appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.13/documenter.zip -FileName OneScriptDocumenter.zip
     
     7z x OneScriptDocumenter.zip > NUL
 
@@ -29,19 +29,15 @@ install:
 
 build:
   verbosity: minimal
+configuration: Release
 test_script:
 - ps: nunit3-console --x86 NUnitTests\bin\Debug\NUnitTests.dll
 
 after_build:
-# Если в компоненте несколько DLL, нужно указать каждую.
-# Указывать по маске *.dll не стоит, потому что тут же лежат
-# библиотеки из NuGet - ОдноСкрипт и все зависимости
 - cmd: >-
-    OneScriptDocumenter.exe json oslib\bin\syntaxHelp.json oscript-component\bin\Debug\oscript-component.dll
+    OneScriptDocumenter.exe json oslib\bin\syntaxHelp.json oscript-component\bin\%CONFIGURATION%\oscript-component.dll
 
-    copy oscript-component\bin\Debug\oscript-component.dll oslib\bin\
-    
-    copy oscript-component\bin\Debug\oscript-component.xml oslib\bin\
+    xcopy oscript-component\bin\%CONFIGURATION%\oscript-component.* oslib\bin\
     
     cd oslib
 
