@@ -29,7 +29,7 @@ install:
 
 build:
   verbosity: minimal
-configuration: Debug
+configuration: Release
 test_script:
 - cmd: nunit3-console --x86 NUnitTests\bin\%CONFIGURATION%\NUnitTests.dll
 
