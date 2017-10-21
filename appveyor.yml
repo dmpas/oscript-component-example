@@ -39,7 +39,7 @@ after_build:
 
     xcopy oscript-component\bin\%CONFIGURATION%\oscript-component.* oslib\bin\
 
-    xcopy README.md osblib
+    xcopy README.md osblib\
     
     cd oslib
 
