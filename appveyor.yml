@@ -40,7 +40,7 @@ after_build:
 
     xcopy oscript-component\bin\%CONFIGURATION%\oscript-component.* bin\
 
-    OneScriptDocumenter.exe json bin\syntaxHelp.json bin\oscript-component.dll
+    OneScriptDocumenter.exe json bin\syntaxHelp.json oscript-component\bin\%CONFIGURATION%\oscript-component.dll
 
     opm build .
 
