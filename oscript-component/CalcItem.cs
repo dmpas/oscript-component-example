@@ -4,21 +4,22 @@ using ScriptEngine.Machine;
 
 namespace oscriptcomponent
 {
-	[ContextClass("Слагаемое", "SumItem")]
-	public class SumItem : AutoContext<SumItem>
+	/// <summary>
+	/// Определяет объект слагаемого в многочлене
+	/// </summary>
+	[ContextClass("ЭлементВычисления", "CalcItem")]
+	public class CalcItem : AutoContext<CalcItem>
 	{
-		private Decimal value;
-
-		public SumItem(Decimal value)
+		public CalcItem(Decimal value)
 		{
-			this.value = value;
+			Value = value;
 		}
 
+		/// <summary>
+		/// Значение элемента. Число
+		/// </summary>
 		[ContextProperty("Значение", "Value")]
-		public Decimal Value
-		{
-			get { return value; }
-		}
+		public Decimal Value { get; }
 
 		// можем переопределить строковое отображение наших объектов
 		public override string ToString()
@@ -26,6 +27,12 @@ namespace oscriptcomponent
 			return string.Format("[Слагаемое: Значение={0}]", Value);
 		}
 
+		/// <summary>
+		/// По значению.
+		/// </summary>
+		/// <param name="value">Значение элемента. Число</param>
+		/// <returns>ЭлементВычисления</returns>
+		/// <exception cref="RuntimeException"></exception>
 		[ScriptConstructor]
 		public static IRuntimeContextInstance Constructor(IValue value)
 		{
@@ -37,17 +44,17 @@ namespace oscriptcomponent
 
 			if (rawValue.DataType == DataType.Number)
 			{
-				// Пришло число. Вызов вида "Новый Слагаемое(5)"
-				return new SumItem(rawValue.AsNumber());
+				// Пришло число. Вызов вида "Новый ЭлементВычисления(5)"
+				return new CalcItem(rawValue.AsNumber());
 			}
 
 			if (rawValue.DataType == DataType.Object)
 			{
-				// Пришло другое слагаемое. Вызов вида "Новый Слагаемое(ДругоеСлагаемое)"
-				var inputItem = rawValue as SumItem;
+				// Пришло другое слагаемое. Вызов вида "Новый ЭлементВычисления(ДругойЭлемент)"
+				var inputItem = rawValue as CalcItem;
 				if (inputItem != null)
 				{
-					return new SumItem(inputItem.Value);
+					return new CalcItem(inputItem.Value);
 				}
 			}
 

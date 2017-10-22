@@ -4,6 +4,9 @@ using ScriptEngine.Machine;
 
 namespace oscriptcomponent
 {
+	/// <summary>
+	/// Некоторый класс
+	/// </summary>
 	[ContextClass("МойКласс", "MyClass")]
 	public class MyClass : AutoContext<MyClass>
 	{
@@ -11,6 +14,9 @@ namespace oscriptcomponent
 		{
 		}
 
+		/// <summary>
+		/// Некоторое свойство только для чтения.
+		/// </summary>
 		[ContextProperty("СвойствоДляЧтения", "ReadonlyProperty")]
 		public string ReadonlyProperty
 		{
@@ -20,6 +26,10 @@ namespace oscriptcomponent
 			}
 		}
 
+		/// <summary>
+		/// Некоторый конструктор
+		/// </summary>
+		/// <returns></returns>
 		[ScriptConstructor]
 		public static IRuntimeContextInstance Constructor()
 		{
