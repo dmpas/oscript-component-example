@@ -36,7 +36,7 @@ test_script:
 after_build:
 - cmd: >-
 
-    del oscript-component\bin\%CONFIGURATION%\*.pdb /Y
+    del oscript-component\bin\%CONFIGURATION%\*.pdb
 
     mkdir bin
 
