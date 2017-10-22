@@ -1,4 +1,6 @@
 version: 1.0.{build}
+environment:
+  main_project: oscript-component
 before_build:
 - ps: nuget restore
 init:
@@ -36,13 +38,13 @@ test_script:
 after_build:
 - cmd: >-
 
-    del oscript-component\bin\%CONFIGURATION%\*.pdb
+    del %main_project%\bin\%CONFIGURATION%\*.pdb
 
     mkdir bin
 
-    xcopy oscript-component\bin\%CONFIGURATION%\oscript-component.* bin\
+    xcopy %main_project%\bin\%CONFIGURATION%\%main_project%.* bin\
 
-    OneScriptDocumenter.exe json bin\syntaxHelp.json oscript-component\bin\%CONFIGURATION%\oscript-component.dll
+    OneScriptDocumenter.exe json bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\%main_project%.dll
 
     opm build .
 
