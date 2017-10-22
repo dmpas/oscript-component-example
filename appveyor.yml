@@ -45,5 +45,5 @@ after_build:
     opm build .
 
 artifacts:
-- path: *.ospx
+- path: .\*.ospx
   name: component
