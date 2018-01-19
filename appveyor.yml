@@ -4,6 +4,7 @@ environment:
 before_build:
 - ps: nuget restore
 init:
+- REG ADD "HKLM\Software\Microsoft\Command Processor" /v Autorun /t REG_SZ /d "chcp 65001>nul" /f
 - ps: Set-WinSystemLocale ru-RU
 - ps: Start-Sleep -s 5
 - ps: Restart-Computer
