@@ -16,7 +16,7 @@ namespace oscriptcomponent
 		Addition,
 
 		/// <summary>
-		/// Рассчитыват произведение элементов
+		/// Рассчитывает произведение элементов
 		/// </summary>
 		[EnumItem("Умножение", "Multiplication")]
 		Multiplication
