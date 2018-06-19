@@ -47,11 +47,7 @@ namespace NUnitTests
 			var testrunnerSource = LoadFromAssemblyResource("NUnitTests.Tests.testrunner.os");
 			var testrunnerModule = engine.GetCompilerService().CreateModule(testrunnerSource);
 
-			{
-				var mi = engine.GetType().GetMethod("SetGlobalEnvironment",
-					BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance);
-				mi.Invoke(engine, new object[] {this, testrunnerSource});
-			}
+			engine.SetGlobalEnvironment(this, testrunnerSource);
 
 			engine.LoadUserScript(new ScriptEngine.UserAddedScript()
 			{
