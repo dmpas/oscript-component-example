@@ -55,7 +55,7 @@ after_build:
 
     opm build .
 
-    opm install -f *.ospx
+    for %%X in (*.ospx) do (opm install -f %%X )
 
     oscript testcomponent.os
 
