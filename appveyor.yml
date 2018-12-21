@@ -34,10 +34,6 @@ install:
     
     7z x OneScriptDocumenter.zip > NUL
 
-    oscript -version
-
-    opm install opm
-
 build:
   verbosity: minimal
 configuration: Release
