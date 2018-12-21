@@ -20,6 +20,8 @@ init:
 - ps: Restart-Computer
 install:
 - cmd: >-
+    echo %PATH%
+
     appveyor DownloadFile https://github.com/silverbulleters/ovm/releases/download/v1.0.0-RC6/ovm.exe -FileName ovm.exe
 
     ovm.exe install %ONESCRIPT_VERSION%
@@ -28,6 +30,8 @@ install:
 
     refreshenv
     
+    echo %PATH%
+
     appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.13/documenter.zip -FileName OneScriptDocumenter.zip
     
     7z x OneScriptDocumenter.zip > NUL
