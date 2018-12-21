@@ -55,6 +55,10 @@ after_build:
 
     opm build .
 
+    opm install -f *.ospx
+
+    oscript testcomponent.os
+
 artifacts:
 - path: .\*.ospx
   name: component
