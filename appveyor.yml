@@ -11,6 +11,9 @@ environment:
   - ONESCRIPT_VERSION: 1.0.21
   - ONESCRIPT_VERSION: stable
   - ONESCRIPT_VERSION: dev
+matrix:
+  allow_failures:
+    - ONESCRIPT_VERSION: dev
 before_build:
 - ps: nuget restore
 init:
