@@ -5,12 +5,13 @@ environment:
   - ONESCRIPT_VERSION: stable
   - ONESCRIPT_VERSION: dev
 # тут оставляем официально поддерживаемые версии
+  - ONESCRIPT_VERSION: 1.1.1
   - ONESCRIPT_VERSION: 1.0.21
 #  - ONESCRIPT_VERSION: 1.0.20
   - ONESCRIPT_VERSION: 1.0.19
 #  - ONESCRIPT_VERSION: 1.0.18
 #  - ONESCRIPT_VERSION: 1.0.17
-  - ONESCRIPT_VERSION: 1.0.16
+#  - ONESCRIPT_VERSION: 1.0.16
 #  - ONESCRIPT_VERSION: 1.0.15
 #  - ONESCRIPT_VERSION: 1.0.14
 #  - ONESCRIPT_VERSION: 1.0.13
@@ -30,7 +31,7 @@ init:
 - ps: Restart-Computer
 install:
 - cmd: >-
-    appveyor DownloadFile https://github.com/silverbulleters/ovm/releases/download/v1.0.0-RC6/ovm.exe -FileName ovm.exe
+    appveyor DownloadFile https://github.com/silverbulleters/ovm/releases/download/v1.0.0-RC9/ovm.exe -FileName ovm.exe
 
     ovm.exe install %ONESCRIPT_VERSION%
 
