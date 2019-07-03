@@ -45,7 +45,7 @@ namespace NUnitTests
 			engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(EngineHelpWrapper)));
 
 			var testrunnerSource = LoadFromAssemblyResource("NUnitTests.Tests.testrunner.os");
-			var testrunnerModule = engine.GetCompilerService().CreateModule(testrunnerSource);
+			var testrunnerModule = engine.GetCompilerService().Compile(testrunnerSource);
 
 			{
 				var mi = engine.GetType().GetMethod("SetGlobalEnvironment",
@@ -56,7 +56,7 @@ namespace NUnitTests
 			engine.LoadUserScript(new ScriptEngine.UserAddedScript()
 			{
 				Type = ScriptEngine.UserAddedScriptType.Class,
-				Module = testrunnerModule,
+				Image = testrunnerModule,
 				Symbol = "TestRunner"
 			});
 
@@ -69,12 +69,12 @@ namespace NUnitTests
 		public void RunTestScript(string resourceName)
 		{
 			var source = LoadFromAssemblyResource(resourceName);
-			var module = engine.GetCompilerService().CreateModule(source);
+			var bytecodeImage = engine.GetCompilerService().Compile(source);
 
 			engine.LoadUserScript(new ScriptEngine.UserAddedScript()
 			{
 				Type = ScriptEngine.UserAddedScriptType.Class,
-				Module = module,
+				Image = bytecodeImage,
 				Symbol = resourceName
 			});
 

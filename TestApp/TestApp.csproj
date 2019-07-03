@@ -27,22 +27,23 @@
     <ExternalConsole>true</ExternalConsole>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="DotNetZip, Version=1.13.3.0, Culture=neutral, PublicKeyToken=6583c7c814667745">
+      <HintPath>..\packages\DotNetZip.1.13.3\lib\net40\DotNetZip.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ScriptEngine, Version=1.0.20.107, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\OneScript.1.0.20\lib\net452\ScriptEngine.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ScriptEngine.HostedScript, Version=1.0.20.107, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\OneScript.StandardLibrary.1.0.20\lib\net452\ScriptEngine.HostedScript.dll</HintPath>
+    <Reference Include="ScriptEngine, Version=1.1.1.42, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\OneScript.1.1.1\lib\net452\ScriptEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ScriptEngine.HostedScript, Version=1.1.1.42, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\OneScript.StandardLibrary.1.1.1\lib\net452\ScriptEngine.HostedScript.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="DotNetZip">
-      <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />

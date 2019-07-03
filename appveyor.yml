@@ -5,18 +5,10 @@ environment:
   - ONESCRIPT_VERSION: stable
   - ONESCRIPT_VERSION: dev
 # тут оставляем официально поддерживаемые версии
-  - ONESCRIPT_VERSION: 1.0.21
-#  - ONESCRIPT_VERSION: 1.0.20
-  - ONESCRIPT_VERSION: 1.0.19
-#  - ONESCRIPT_VERSION: 1.0.18
-#  - ONESCRIPT_VERSION: 1.0.17
-  - ONESCRIPT_VERSION: 1.0.16
-#  - ONESCRIPT_VERSION: 1.0.15
-#  - ONESCRIPT_VERSION: 1.0.14
+  - ONESCRIPT_VERSION: 1.1.1
+#  - ONESCRIPT_VERSION: 1.0.21
+#  - ONESCRIPT_VERSION: 1.0.19
 #  - ONESCRIPT_VERSION: 1.0.13
-#  - ONESCRIPT_VERSION: 1.0.12
-#  - ONESCRIPT_VERSION: 1.0.11
-#  - ONESCRIPT_VERSION: 1.0.10
 matrix:
   allow_failures:
 #  падение на ночнике - ничего страшного
@@ -30,7 +22,7 @@ init:
 - ps: Restart-Computer
 install:
 - cmd: >-
-    appveyor DownloadFile https://github.com/silverbulleters/ovm/releases/download/v1.0.0-RC6/ovm.exe -FileName ovm.exe
+    appveyor DownloadFile https://github.com/silverbulleters/ovm/releases/download/v1.0.0-RC9/ovm.exe -FileName ovm.exe
 
     ovm.exe install %ONESCRIPT_VERSION%
 
@@ -40,7 +32,7 @@ install:
     
     set PATH=%PATH%;C:\Program Files\AppVeyor\BuildAgent\
 
-    appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.13/documenter.zip -FileName OneScriptDocumenter.zip
+    appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.14/documenter.zip -FileName OneScriptDocumenter.zip
     
     7z x OneScriptDocumenter.zip > NUL
 
