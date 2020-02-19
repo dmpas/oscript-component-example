@@ -58,10 +58,12 @@ after_build:
     
     xcopy %main_project%\bin\%CONFIGURATION%\* oslib\bin\
 
-    opm build oslib
-
+    cd oslib
+    
+    opm build .
+    
     for %%X in (*.ospx) do (opm install -f %%X )
 
 artifacts:
-- path: .\*.ospx
+- path: .\oslib\*.ospx
   name: component
