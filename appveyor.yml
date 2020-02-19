@@ -32,6 +32,8 @@ install:
 
     refreshenv
     
+    oscript -v
+    
     set PATH=%PATH%;C:\Program Files\AppVeyor\BuildAgent\
 
     appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.14/documenter.zip -FileName OneScriptDocumenter.zip
