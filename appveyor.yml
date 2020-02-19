@@ -63,6 +63,8 @@ after_build:
     opm build .
     
     for %%X in (*.ospx) do (opm install -f %%X )
+    
+    cd ..
 
 artifacts:
 - path: .\oslib\*.ospx
