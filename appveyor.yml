@@ -24,7 +24,7 @@ init:
 - ps: Restart-Computer
 install:
 - cmd: >-
-    appveyor DownloadFile https://github.com/silverbulleters/ovm/releases/download/v1.0.0-RC9/ovm.exe -FileName ovm.exe
+    appveyor DownloadFile https://github.com/oscript-library/ovm/releases/download/v1.0.0-RC15/ovm.exe -FileName ovm.exe
 
     ovm.exe install %ONESCRIPT_VERSION%
 
