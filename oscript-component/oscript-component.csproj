@@ -38,12 +38,16 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ScriptEngine, Version=1.1.1.42, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\OneScript.1.1.1\lib\net452\ScriptEngine.dll</HintPath>
+    <Reference Include="OneScript.Language, Version=1.3.0.2, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\OneScript.Language.1.3.0-pre2\lib\net452\OneScript.Language.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ScriptEngine.HostedScript, Version=1.1.1.42, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\OneScript.StandardLibrary.1.1.1\lib\net452\ScriptEngine.HostedScript.dll</HintPath>
+    <Reference Include="ScriptEngine, Version=1.3.0.2, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\OneScript.1.3.0-pre2\lib\net452\ScriptEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ScriptEngine.HostedScript, Version=1.3.0.2, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\OneScript.StandardLibrary.1.3.0-pre2\lib\net452\ScriptEngine.HostedScript.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
