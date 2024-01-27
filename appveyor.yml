@@ -36,22 +36,29 @@ build:
 configuration: Release
 test_script:
 - cmd: nunit3-console NUnitTests\bin\%CONFIGURATION%\net6.0\NUnitTests.dll --result=myresults.xml;format=AppVeyor
+- cmd: oscript testcomponent.os
 
 after_build:
 - cmd: >-
 
     del %main_project%\bin\%CONFIGURATION%\netstandard2.1\*.pdb
 
-    mkdir bin
+    mkdir -p oslib\bin
 
     OneScriptDocumenter.exe json bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\netstandard2.1\%main_project%.dll
     
     del %main_project%\bin\%CONFIGURATION%\ScriptEngine*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\NewtonSoft*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\DotNetZip*.*
     
-    xcopy %main_project%\bin\%CONFIGURATION%\netstandard2.1\* bin\
+    xcopy %main_project%\bin\%CONFIGURATION%\netstandard2.1\* oslib\bin\
+    
+    cd oslib
 
     opm build .
+    
+    for %%X in (*.ospx) do (opm install -f %%X )
+    
+    cd ..
 
 artifacts:
-- path: .\*.ospx
+- path: .\oslib\*.ospx
   name: component
