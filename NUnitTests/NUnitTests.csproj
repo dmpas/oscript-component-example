@@ -1,71 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9A739C32-D551-43B0-920A-D9C53367BC38}</ProjectGuid>
+    <Configurations>Debug;Release;ReleaseNetStandard</Configurations>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <RootNamespace>NUnitTests</RootNamespace>
-    <AssemblyName>NUnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetZip, Version=1.13.3.0, Culture=neutral, PublicKeyToken=6583c7c814667745">
-      <HintPath>..\packages\DotNetZip.1.13.3\lib\net40\DotNetZip.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="OneScript.Language, Version=1.3.0.2, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\OneScript.Language.1.3.0-pre2\lib\net452\OneScript.Language.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ScriptEngine, Version=1.3.0.2, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\OneScript.1.3.0-pre2\lib\net452\ScriptEngine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ScriptEngine.HostedScript, Version=1.3.0.2, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\OneScript.StandardLibrary.1.3.0-pre2\lib\net452\ScriptEngine.HostedScript.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
+    <PackageReference Include="OneScript" Version="2.0.0-rc4" />
+    <PackageReference Include="OneScript.Hosting" Version="2.0.0-rc4" />
+    <PackageReference Include="OneScript.StandardLibrary" Version="2.0.0-rc4" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EngineHelpWrapper.cs" />
-    <Compile Include="MainTestClass.cs" />
+    <ProjectReference Include="..\oscript-component\oscript-component.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\oscript-component\oscript-component.csproj">
-      <Project>{EA173D06-CCD2-45D5-A263-DC866289517A}</Project>
-      <Name>oscript-component</Name>
-    </ProjectReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0-preview-20180610-02" />
+    <PackageReference Include="NUnit" Version="3.10.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tests\testrunner.os" />
     <EmbeddedResource Include="Tests\external.os" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,11 +1,14 @@
 ﻿// Исполняемое приложение для запуска компоненты под отладчиком
 
 // В проекте TestApp в "Ссылки" ("References") должен быть добавлен проект компоненты
-// В проекте TestApp должны быть подключены NuGet пакеты OneScript и OneScript.Library
+// В проекте TestApp должны быть подключены NuGet пакеты OneScript, OneScript.Hosting и OneScript.StandardLibrary
 
 using System;
+using OneScript.StandardLibrary;
+using OneScript.StandardLibrary.Collections;
 using ScriptEngine.HostedScript;
-using ScriptEngine.HostedScript.Library;
+using ScriptEngine.HostedScript.Extensions;
+using ScriptEngine.Hosting;
 
 namespace TestApp
 {
@@ -30,21 +33,36 @@ namespace TestApp
 
 		public static HostedScriptEngine StartEngine()
 		{
-			var engine = new ScriptEngine.HostedScript.HostedScriptEngine();
-			engine.Initialize();
 
+			var builder = DefaultEngineBuilder.Create();
+			builder.SetupConfiguration(providers => {});
+			builder.SetDefaultOptions()
+				.UseImports()
+				.UseNativeRuntime()
+				.UseFileSystemLibraries()
+				;
+
+			var engine = builder.Build(); 
+			
+			// Регистрируем сборку по имени любого из стандартных классов движка
+			engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(ArrayImpl)));
+			
 			// Тут можно указать любой класс из компоненты
-			engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent.MyClass)));
-
+			engine.AttachExternalAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent.MyClass)));
 			// Если проектов компонент несколько, то надо взять по классу из каждой из них
 			// engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent_2.MyClass_2)));
 			// engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent_3.MyClass_3)));
+			
+			
+			var hostedScriptEngine = new HostedScriptEngine(engine);
+			hostedScriptEngine.Initialize();
 
-			return engine;
+			return hostedScriptEngine;
 		}
 
 		public static void Main(string[] args)
 		{
+			
 			var engine = StartEngine();
 			var script = engine.Loader.FromString(SCRIPT);
 			var process = engine.CreateProcess(new MainClass(), script);
@@ -66,7 +84,7 @@ namespace TestApp
 			Console.WriteLine(exc.ToString());
 		}
 
-		public bool InputString(out string result, int maxLen)
+		public bool InputString(out string result, string prompt, int maxLen, bool multiline)
 		{
 			throw new NotImplementedException();
 		}

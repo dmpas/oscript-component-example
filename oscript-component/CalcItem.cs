@@ -1,6 +1,9 @@
 ﻿using System;
-using ScriptEngine.Machine.Contexts;
+using OneScript.Contexts;
+using OneScript.Exceptions;
+using OneScript.Values;
 using ScriptEngine.Machine;
+using ScriptEngine.Machine.Contexts;
 
 namespace oscriptcomponent
 {
@@ -34,7 +37,7 @@ namespace oscriptcomponent
 		/// <returns>ЭлементВычисления</returns>
 		/// <exception cref="RuntimeException"></exception>
 		[ScriptConstructor]
-		public static IRuntimeContextInstance Constructor(IValue value)
+		public static CalcItem Constructor(IValue value)
 		{
 			// В value может быть не значение, а ссылка, содержащая значение.
 			// Поэтому необходимо приводить входящие параметры к сырому значению.
@@ -42,20 +45,16 @@ namespace oscriptcomponent
 
 			// После этого можно оценивать, что за параметр пришёл
 
-			if (rawValue.DataType == DataType.Number)
+			if (rawValue is BslNumericValue)
 			{
 				// Пришло число. Вызов вида "Новый ЭлементВычисления(5)"
 				return new CalcItem(rawValue.AsNumber());
 			}
 
-			if (rawValue.DataType == DataType.Object)
+			if (rawValue is CalcItem inputItem)
 			{
 				// Пришло другое слагаемое. Вызов вида "Новый ЭлементВычисления(ДругойЭлемент)"
-				var inputItem = rawValue as CalcItem;
-				if (inputItem != null)
-				{
-					return new CalcItem(inputItem.Value);
-				}
+				return new CalcItem(inputItem.Value);
 			}
 
 			// пришло нечто нам неведомое - бросаем исключение

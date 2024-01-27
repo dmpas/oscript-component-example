@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using NUnit.Framework;
-using ScriptEngine.HostedScript;
-using ScriptEngine.Machine;
-using ScriptEngine.Environment;
+﻿using NUnit.Framework;
 using oscriptcomponent;
 
 // Используется NUnit 3.6
