@@ -1,9 +1,11 @@
 ﻿using System;
 using ScriptEngine.Machine.Contexts;
 using ScriptEngine.Machine;
-using ScriptEngine.HostedScript.Library;
 using System.Collections.Generic;
 using System.Collections;
+using OneScript.Contexts;
+using OneScript.Exceptions;
+using OneScript.StandardLibrary.Collections;
 
 namespace oscriptcomponent
 {
@@ -11,20 +13,13 @@ namespace oscriptcomponent
 	/// Производит необходимое вычисление
 	/// </summary>
 	[ContextClass("Вычисление", "Calculation")]
-	public class Calculation : AutoContext<Calculation>
-	, ICollectionContext   // Скажем ОдноСкрипту, что это коллекция
-	, IEnumerable<CalcItem> // IEnumerable<> нужен, чтобы работать с классом как с коллекцией из C#
-
-	/*
-	 * До 15-й версии движка ICollectionContext включает в себя IEnumerable<IValue>.
-	 * Начиная с 15-й версии IEnumerable<> необходимо указывать явно с нужным типом элемента
-	*/
+	public class Calculation : AutoContext<Calculation>, ICollectionContext<CalcItem> // Скажем ОдноСкрипту, что это коллекция
 	{
 		// Возьмём Массив из стандартной библиотеки
 
 		public Calculation()
 		{
-			Items = ArrayImpl.Constructor() as ArrayImpl;
+			Items = ArrayImpl.Constructor();
 
 			// Также можно написать items = new ArrayIml();
 			// но лучше вызвать предлагаемый библиотекой конструктор
@@ -55,7 +50,7 @@ namespace oscriptcomponent
 		public void AddItem(IValue item)
 		{
 			var itemToAdd = CalcItem.Constructor(item);
-			Items.Add(ValueFactory.Create(itemToAdd));
+			Items.Add(itemToAdd);
 		}
 
 		/// <summary>
@@ -134,12 +129,12 @@ namespace oscriptcomponent
 		// Данные методы необходимы, чтобы ОдноСкрипт мог обходить объект циклом Для Каждого
 		public int Count()
 		{
-			return ((ICollectionContext)Items).Count();
+			return Items.Count();
 		}
 
 		public CollectionEnumerator GetManagedIterator()
 		{
-			return ((ICollectionContext)Items).GetManagedIterator();
+			return Items.GetManagedIterator();
 		}
 
 		#endregion

@@ -1,4 +1,5 @@
 ﻿using System;
+using OneScript.Contexts.Enums;
 using ScriptEngine;
 
 namespace oscriptcomponent
@@ -12,13 +13,13 @@ namespace oscriptcomponent
 		/// <summary>
 		/// Рассчитывать сумму элементов
 		/// </summary>
-		[EnumItem("Сложение", "Addition")]
+		[EnumValue("Сложение", "Addition")]
 		Addition,
 
 		/// <summary>
 		/// Рассчитывает произведение элементов
 		/// </summary>
-		[EnumItem("Умножение", "Multiplication")]
+		[EnumValue("Умножение", "Multiplication")]
 		Multiplication
 	}
 }

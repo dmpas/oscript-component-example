@@ -1,6 +1,6 @@
 ﻿using System;
+using OneScript.Contexts;
 using ScriptEngine.Machine.Contexts;
-using ScriptEngine.Machine;
 
 namespace oscriptcomponent
 {

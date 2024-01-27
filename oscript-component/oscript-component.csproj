@@ -1,21 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net452;net462;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
     <Configurations>Debug;Release;ReleaseNetStandard</Configurations>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScriptEngine, Version=1.0.20.107, Culture=neutral, PublicKeyToken=null" Condition="'$(TargetFramework)' == 'net452' OR '$(TargetFramework)' == 'net462'">
-      <HintPath>..\packages\OneScript.1.0.20\lib\net452\ScriptEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="ScriptEngine, Version=1.0.20.107, Culture=neutral, PublicKeyToken=null" Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
-      <HintPath>..\packages\OneScript.1.0.20\lib\netstandard2.0\ScriptEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="ScriptEngine.HostedScript, Version=1.0.20.107, Culture=neutral, PublicKeyToken=null" Condition="'$(TargetFramework)' == 'net452' OR '$(TargetFramework)' == 'net462'">
-      <HintPath>..\packages\OneScript.StandardLibrary.1.0.20\lib\net452\ScriptEngine.HostedScript.dll</HintPath>
-    </Reference>
-    <Reference Include="ScriptEngine.HostedScript, Version=1.0.20.107, Culture=neutral, PublicKeyToken=null" Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
-      <HintPath>..\packages\OneScript.StandardLibrary.1.0.20\lib\netstandard2.0\ScriptEngine.HostedScript.dll</HintPath>
-    </Reference>
+    <PackageReference Include="OneScript" Version="2.0.0-rc4" />
+    <PackageReference Include="OneScript.StandardLibrary" Version="2.0.0-rc4" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-version: 1.0.{build}
+version: 2.0.{build}
+image: Visual Studio 2022
 environment:
   main_project: oscript-component
 before_build:
@@ -14,16 +15,16 @@ install:
 
     cd engine
 
-    appveyor DownloadFile http://oscript.io/downloads/latest/exe -FileName os.exe
+    appveyor DownloadFile https://oscript.io/downloads/preview/OneScript-2.0.0-rc4-fdd-x64.zip -FileName fdd.zip
 
-    os.exe /silent
+    7z x fdd.zip > NUL
 
-    set PATH=%ProgramFiles(x86)%\OneScript\bin;%PATH%
+    set PATH=%cd%\bin;%PATH%
 
     cd ..
-    
+
     appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.13/documenter.zip -FileName OneScriptDocumenter.zip
-    
+
     7z x OneScriptDocumenter.zip > NUL
 
     oscript -version
@@ -34,20 +35,20 @@ build:
   verbosity: minimal
 configuration: Release
 test_script:
-- cmd: nunit3-console --x86 NUnitTests\bin\%CONFIGURATION%\NUnitTests.dll
+- cmd: nunit3-console NUnitTests\bin\%CONFIGURATION%\net6.0\NUnitTests.dll --result=myresults.xml;format=AppVeyor
 
 after_build:
 - cmd: >-
 
-    del %main_project%\bin\%CONFIGURATION%\*.pdb
+    del %main_project%\bin\%CONFIGURATION%\netstandard2.1\*.pdb
 
     mkdir bin
 
-    OneScriptDocumenter.exe json bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\%main_project%.dll
+    OneScriptDocumenter.exe json bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\netstandard2.1\%main_project%.dll
     
-    del %main_project%\bin\%CONFIGURATION%\ScriptEngine*.* %main_project%\bin\%CONFIGURATION%\NewtonSoft*.* %main_project%\bin\%CONFIGURATION%\DotNetZip*.*
+    del %main_project%\bin\%CONFIGURATION%\ScriptEngine*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\NewtonSoft*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\DotNetZip*.*
     
-    xcopy %main_project%\bin\%CONFIGURATION%\* bin\
+    xcopy %main_project%\bin\%CONFIGURATION%\netstandard2.1\* bin\
 
     opm build .
 
