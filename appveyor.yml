@@ -45,7 +45,7 @@ after_build:
 
     mkdir -p oslib\bin
 
-    OneScriptDocumenter.exe json bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\netstandard2.1\%main_project%.dll
+    OneScriptDocumenter.exe json oslib\bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\netstandard2.1\%main_project%.dll
     
     del %main_project%\bin\%CONFIGURATION%\ScriptEngine*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\NewtonSoft*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\DotNetZip*.*
     
