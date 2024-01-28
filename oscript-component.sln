@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oscript-component", "oscript-component\oscript-component.csproj", "{EA173D06-CCD2-45D5-A263-DC866289517A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "component", "component\component.csproj", "{EA173D06-CCD2-45D5-A263-DC866289517A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{EFFB5754-9D8D-4014-A5A4-6BFFCFBA0F80}"
 EndProject

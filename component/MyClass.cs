@@ -31,7 +31,7 @@ namespace oscriptcomponent
 		/// </summary>
 		/// <returns></returns>
 		[ScriptConstructor]
-		public static IRuntimeContextInstance Constructor()
+		public static MyClass Constructor()
 		{
 			return new MyClass();
 		}

@@ -12,6 +12,6 @@
     <PackageReference Include="OneScript.StandardLibrary" Version="2.0.0-rc4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\oscript-component\oscript-component.csproj" />
+    <ProjectReference Include="..\component\component.csproj" />
   </ItemGroup>
 </Project>

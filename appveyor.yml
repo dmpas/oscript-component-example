@@ -1,7 +1,7 @@
 version: 2.0.{build}
 image: Visual Studio 2022
 environment:
-  main_project: oscript-component
+  main_project: component
 before_build:
 - ps: nuget restore
 init:
@@ -43,13 +43,13 @@ after_build:
 
     del %main_project%\bin\%CONFIGURATION%\netstandard2.1\*.pdb
 
-    mkdir -p oslib\bin
+    mkdir -p oslib\Components\dotnet
 
-    OneScriptDocumenter.exe json oslib\bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\netstandard2.1\%main_project%.dll
+    OneScriptDocumenter.exe json oslib\Components\dotnet\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\netstandard2.1\1script_%main_project%.dll
     
     del %main_project%\bin\%CONFIGURATION%\ScriptEngine*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\NewtonSoft*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\DotNetZip*.*
     
-    xcopy %main_project%\bin\%CONFIGURATION%\netstandard2.1\* oslib\bin\
+    xcopy %main_project%\bin\%CONFIGURATION%\netstandard2.1\* oslib\Components\dotnet\
     
     cd oslib
 
