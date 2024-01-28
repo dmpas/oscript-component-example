@@ -11,7 +11,7 @@
     <PackageReference Include="OneScript.StandardLibrary" Version="2.0.0-rc4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\oscript-component\oscript-component.csproj" />
+    <ProjectReference Include="..\component\component.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0-preview-20180610-02" />
