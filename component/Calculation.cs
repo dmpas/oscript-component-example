@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*----------------------------------------------------------
+This Source Code Form is subject to the terms of the 
+Mozilla Public License, v.2.0. If a copy of the MPL 
+was not distributed with this file, You can obtain one 
+at http://mozilla.org/MPL/2.0/.
+----------------------------------------------------------*/
+using System;
 using ScriptEngine.Machine.Contexts;
 using ScriptEngine.Machine;
 using System.Collections.Generic;
@@ -6,6 +12,7 @@ using System.Collections;
 using OneScript.Contexts;
 using OneScript.Exceptions;
 using OneScript.StandardLibrary.Collections;
+using OneScript.Execution;
 
 namespace oscriptcomponent
 {
@@ -107,16 +114,11 @@ namespace oscriptcomponent
 		/// <returns>Вычисление</returns>
 		/// <exception cref="RuntimeException"></exception>
 		[ScriptConstructor]
-		public static IRuntimeContextInstance Constructor(IValue calcSource)
+		public static IRuntimeContextInstance Constructor(Calculation calcSource)
 		{
-			var oldAddition = calcSource.GetRawValue() as Calculation;
-			if (oldAddition == null)
-			{
-				throw RuntimeException.InvalidArgumentType();
-			}
-
 			var addition = new Calculation();
-			foreach (var item in oldAddition.Items)
+			addition.OperationType = calcSource.OperationType;
+			foreach (var item in calcSource.Items)
 			{
 				addition.Items.Add(item);
 			}
@@ -132,9 +134,10 @@ namespace oscriptcomponent
 			return Items.Count();
 		}
 
+		
 		public CollectionEnumerator GetManagedIterator()
 		{
-			return Items.GetManagedIterator();
+			return new CollectionEnumerator(Items.GetEnumerator());
 		}
 
 		#endregion
@@ -153,7 +156,11 @@ namespace oscriptcomponent
 		{
 			return GetEnumerator();
 		}
-		#endregion
-	}
+
+        public int Count(IBslProcess process) {
+			return Count();
+        }
+        #endregion
+    }
 }
 

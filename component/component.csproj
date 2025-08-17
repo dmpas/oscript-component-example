@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <Configurations>Debug;Release;ReleaseNetStandard</Configurations>
     <AssemblyName>1script_component</AssemblyName>
     <RootNamespace>oscript-component</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="OneScript" Version="2.0.0-rc4" />
-    <PackageReference Include="OneScript.StandardLibrary" Version="2.0.0-rc4" />
+    <PackageReference Include="OneScript" Version="2.0.0-rc.8" />
+    <PackageReference Include="OneScript.StandardLibrary" Version="2.0.0-rc.8" />
   </ItemGroup>
 </Project>

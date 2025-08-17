@@ -1,7 +1,12 @@
-﻿using NUnit.Framework;
+﻿/*----------------------------------------------------------
+This Source Code Form is subject to the terms of the 
+Mozilla Public License, v.2.0. If a copy of the MPL 
+was not distributed with this file, You can obtain one 
+at http://mozilla.org/MPL/2.0/.
+----------------------------------------------------------*/
+using NUnit.Framework;
 using oscriptcomponent;
-
-// Используется NUnit 3.6
+using System.Collections.Generic;
 
 namespace NUnitTests
 {
@@ -9,16 +14,15 @@ namespace NUnitTests
 	public class MainTestClass
 	{
 
-		private EngineHelpWrapper host;
+		private static readonly string[] TestResourceNames = { "NUnitTests.Tests.external.os" };
+		private static readonly EngineHelpWrapper host = new();
 
-		[OneTimeSetUp]
-		public void Initialize()
+        [OneTimeSetUp]
+		public static void Initialize()
 		{
-			host = new EngineHelpWrapper();
-			host.StartEngine();
-		}
+        }
 
-		[Test]
+        [Test]
 		public void TestAsInternalObjects()
 		{
 			var item1 = new CalcItem(1);
@@ -54,10 +58,20 @@ namespace NUnitTests
 			}
 		}
 
-		[Test]
-		public void TestAsExternalObjects()
+		[Test, TestCaseSource("GetExternalTests")]
+		public void TestAsExternalObjects(ExternalTestCase testCase)
 		{
-			host.RunTestScript("NUnitTests.Tests.external.os");
+			testCase.Run(host.Process);
+		}
+
+		private static ExternalTestCase[] GetExternalTests() {
+            
+			var list = new List<ExternalTestCase>();
+			foreach (var resourceName in TestResourceNames) {
+				host.AddTestCases(list, resourceName);
+			}
+
+			return list.ToArray();
 		}
 	}
 }

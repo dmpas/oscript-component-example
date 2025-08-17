@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*----------------------------------------------------------
+This Source Code Form is subject to the terms of the 
+Mozilla Public License, v.2.0. If a copy of the MPL 
+was not distributed with this file, You can obtain one 
+at http://mozilla.org/MPL/2.0/.
+----------------------------------------------------------*/
+using System;
 using OneScript.Contexts;
 using OneScript.Exceptions;
 using OneScript.Values;
@@ -13,7 +19,7 @@ namespace oscriptcomponent
 	[ContextClass("ЭлементВычисления", "CalcItem")]
 	public class CalcItem : AutoContext<CalcItem>
 	{
-		public CalcItem(Decimal value)
+		public CalcItem(decimal value)
 		{
 			Value = value;
 		}
@@ -22,7 +28,7 @@ namespace oscriptcomponent
 		/// Значение элемента. Число
 		/// </summary>
 		[ContextProperty("Значение", "Value")]
-		public Decimal Value { get; }
+		public decimal Value { get; }
 
 		// можем переопределить строковое отображение наших объектов
 		public override string ToString()
@@ -39,19 +45,13 @@ namespace oscriptcomponent
 		[ScriptConstructor]
 		public static CalcItem Constructor(IValue value)
 		{
-			// В value может быть не значение, а ссылка, содержащая значение.
-			// Поэтому необходимо приводить входящие параметры к сырому значению.
-			IValue rawValue = value.GetRawValue();
-
-			// После этого можно оценивать, что за параметр пришёл
-
-			if (rawValue is BslNumericValue)
+			if (value is BslNumericValue)
 			{
 				// Пришло число. Вызов вида "Новый ЭлементВычисления(5)"
-				return new CalcItem(rawValue.AsNumber());
+				return new CalcItem(value.AsNumber());
 			}
 
-			if (rawValue is CalcItem inputItem)
+			if (value is CalcItem inputItem)
 			{
 				// Пришло другое слагаемое. Вызов вида "Новый ЭлементВычисления(ДругойЭлемент)"
 				return new CalcItem(inputItem.Value);

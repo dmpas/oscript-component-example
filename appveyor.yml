@@ -15,17 +15,13 @@ install:
 
     cd engine
 
-    appveyor DownloadFile https://oscript.io/downloads/preview/OneScript-2.0.0-rc4-fdd-x64.zip -FileName fdd.zip
+    appveyor DownloadFile https://oscript.io/downloads/preview/OneScript-2.0.0-rc.8-fdd-x64.zip -FileName fdd.zip
 
     7z x fdd.zip > NUL
 
     set PATH=%cd%\bin;%PATH%
 
     cd ..
-
-    appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.13/documenter.zip -FileName OneScriptDocumenter.zip
-
-    7z x OneScriptDocumenter.zip > NUL
 
     oscript -version
 
@@ -41,15 +37,17 @@ test_script:
 after_build:
 - cmd: >-
 
-    del %main_project%\bin\%CONFIGURATION%\netstandard2.1\*.pdb
+    set PUBLISH=%main_project%\bin\%CONFIGURATION%\net6.0\publish
+
+    dotnet publish --no-build --configuration %CONFIGURATION%
+
+    del %PUBLISH%\*.pdb
 
     mkdir -p oslib\Components\dotnet
-
-    OneScriptDocumenter.exe json oslib\Components\dotnet\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\netstandard2.1\1script_%main_project%.dll
     
-    del %main_project%\bin\%CONFIGURATION%\ScriptEngine*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\NewtonSoft*.* %main_project%\bin\%CONFIGURATION%\netstandard2.1\DotNetZip*.*
+    del %PUBLISH%\ScriptEngine*.* %PUBLISH%\NewtonSoft*.* %PUBLISH%\DotNetZip*.* %PUBLISH%\OneScript*.*
     
-    xcopy %main_project%\bin\%CONFIGURATION%\netstandard2.1\* oslib\Components\dotnet\
+    xcopy %PUBLISH%\* oslib\Components\dotnet\
     
     cd oslib
 

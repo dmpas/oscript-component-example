@@ -1,4 +1,11 @@
-﻿// Исполняемое приложение для запуска компоненты под отладчиком
+﻿/*----------------------------------------------------------
+This Source Code Form is subject to the terms of the 
+Mozilla Public License, v.2.0. If a copy of the MPL 
+was not distributed with this file, You can obtain one 
+at http://mozilla.org/MPL/2.0/.
+----------------------------------------------------------*/
+
+// Исполняемое приложение для запуска компоненты под отладчиком
 
 // В проекте TestApp в "Ссылки" ("References") должен быть добавлен проект компоненты
 // В проекте TestApp должны быть подключены NuGet пакеты OneScript, OneScript.Hosting и OneScript.StandardLibrary

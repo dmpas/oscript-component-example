@@ -1,12 +1,19 @@
-﻿using System;
-using System.IO;
+﻿/*----------------------------------------------------------
+This Source Code Form is subject to the terms of the 
+Mozilla Public License, v.2.0. If a copy of the MPL 
+was not distributed with this file, You can obtain one 
+at http://mozilla.org/MPL/2.0/.
+----------------------------------------------------------*/
+using OneScript.Execution;
 using OneScript.StandardLibrary;
 using OneScript.StandardLibrary.Collections;
 using ScriptEngine;
-using ScriptEngine.Machine;
 using ScriptEngine.HostedScript;
 using ScriptEngine.HostedScript.Extensions;
 using ScriptEngine.Hosting;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace NUnitTests
 {
@@ -14,69 +21,48 @@ namespace NUnitTests
 	{
 		public EngineHelpWrapper()
 		{
-		}
+            Engine = DefaultEngineBuilder.Create()
+				.SetupConfiguration(providers => { })
+				.SetDefaultOptions()
+                .UseImports()
+                .UseNativeRuntime()
+                .UseFileSystemLibraries()
+				.Build();
 
-		private ScriptingEngine Engine { get; set; }
+            // Регистрируем сборку по имени любого из стандартных классов движка
+            Engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(ArrayImpl)));
 
-		private IValue TestRunner { get; set; }
+            // Тут можно указать любой класс из компоненты
+            Engine.AttachExternalAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent.MyClass)));
+            // Если проектов компонент несколько, то надо взять по классу из каждой из них
+            // engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent_2.MyClass_2)));
+            // engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent_3.MyClass_3)));
 
-		public void StartEngine()
-		{
-			var builder = DefaultEngineBuilder.Create();
-			builder.SetupConfiguration(providers => {});
-			builder.SetDefaultOptions()
-				.UseImports()
-				.UseNativeRuntime()
-				.UseFileSystemLibraries()
-				;
+            Hosted = new HostedScriptEngine(Engine);
+            Hosted.Initialize();
 
-			Engine = builder.Build();
-			
-			// Регистрируем сборку по имени любого из стандартных классов движка
-			Engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(ArrayImpl)));
-			
-			// Тут можно указать любой класс из компоненты
-			Engine.AttachExternalAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent.MyClass)));
-			// Если проектов компонент несколько, то надо взять по классу из каждой из них
-			// engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent_2.MyClass_2)));
-			// engine.AttachAssembly(System.Reflection.Assembly.GetAssembly(typeof(oscriptcomponent_3.MyClass_3)));
+            var cs = Engine.GetCompilerService();
+            var testRunnerSource = Engine.Loader.FromString(LoadCodeFromAssemblyResource("NUnitTests.Tests.testrunner.os"));
 
-			var hosted = new HostedScriptEngine(Engine);
-			hosted.Initialize();
-			
-			var cs = Engine.GetCompilerService(); 
-			var testrunnerSource = LoadCodeFromAssemblyResource("NUnitTests.Tests.testrunner.os");
-			var testRunner = Engine.AttachedScriptsFactory.LoadFromString(cs, testrunnerSource);
-			
-			TestRunner = (IValue)testRunner;
+            Process = Engine.NewProcess();
+            TestRunner = ExternalTestRunner.Create(cs, testRunnerSource, Process);
+        }
 
-		}
+		private ScriptingEngine Engine { get; }
 
-		public void RunTestScript(string resourceName)
-		{
-			var source = LoadCodeFromAssemblyResource(resourceName);
-			var test = Engine.AttachedScriptsFactory.LoadFromString(Engine.GetCompilerService(), source);
-			
-			ArrayImpl testArray;
-			{
-				var methodIndex = test.GetMethodNumber("ПолучитьСписокТестов");
-				test.CallAsFunction(methodIndex, new IValue[] { TestRunner }, out var ivTests);
-				testArray = ivTests as ArrayImpl;
-			}
+		private ExternalTestRunner TestRunner { get; }
 
-			foreach (var ivTestName in testArray)
-			{
-				string testName = ivTestName.AsString();
-				var methodIndex = test.GetMethodNumber(testName);
-				if (methodIndex == -1)
-				{
-					// Тест указан, но процедуры нет или она не экспортирована
-					continue;
-				}
+		public IBslProcess Process { get; }
 
-				test.CallAsProcedure(methodIndex, new IValue[] { });
-			}
-		}
+		private HostedScriptEngine Hosted {  get; }
+
+		public void AddTestCases(List<ExternalTestCase> list, string resourceName) {
+            var testSource = Engine.Loader.FromString(LoadCodeFromAssemblyResource(resourceName));
+            var cs = Engine.GetCompilerService();
+            var test = ExternalTest.Create(cs, testSource, Process);
+            var testArray = test.GetTestCases(TestRunner, Process);
+			list.AddRange(testArray);
+        }
 
 		private static string LoadCodeFromAssemblyResource(string resourceName)
 		{
