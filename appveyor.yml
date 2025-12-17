@@ -15,7 +15,7 @@ install:
 
     cd engine
 
-    appveyor DownloadFile https://oscript.io/downloads/preview/OneScript-2.0.0-rc.8-fdd-x64.zip -FileName fdd.zip
+    appveyor DownloadFile https://oscript.io/downloads/preview/OneScript-2.0.0-rc.10-fdd-x64.zip -FileName fdd.zip
 
     7z x fdd.zip > NUL
 
