@@ -34,3 +34,5 @@ TestApp.exe.config
 
 [Pp]ackages/
 .idea
+.vscode
+*.ospx

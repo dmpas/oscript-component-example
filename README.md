@@ -28,5 +28,5 @@
 
 6.  После чего в коде можно использовать вызов вида
 
-        ПодключитьВнешнююКомпоненту("oscript-component/bin/Release/net6.0/publish/1script_component.dll");
+        ПодключитьВнешнююКомпоненту("oscript-component/bin/Release/net8.0/publish/1script_component.dll");
         ОбъектМоегоКласса = Новый МойКласс;
