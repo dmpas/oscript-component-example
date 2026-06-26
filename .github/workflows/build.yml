@@ -8,7 +8,7 @@ env:
   CONFIGURATION: Release
   MAIN_PROJECT: component
   TARGET_FRAMEWORK: net8.0
-  ONESCRIPT_URL: https://oscript.io/downloads/preview/OneScript-2.0.0-rc.10-fdd-x64.zip
+  ONESCRIPT_URL: https://oscript.io/downloads/2_0_1/fdd/x64
 
 jobs:
   build:
