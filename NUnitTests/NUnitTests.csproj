@@ -2,13 +2,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Configurations>Debug;Release;ReleaseNetStandard</Configurations>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="OneScript" Version="2.0.0-rc.8" />
-    <PackageReference Include="OneScript.Hosting" Version="2.0.0-rc.8" />
-    <PackageReference Include="OneScript.StandardLibrary" Version="2.0.0-rc.8" />
+    <PackageReference Include="OneScript" Version="2.0.1" />
+    <PackageReference Include="OneScript.Hosting" Version="2.0.1" />
+    <PackageReference Include="OneScript.StandardLibrary" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\component\component.csproj" />
